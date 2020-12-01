@@ -1,18 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package obligatorio;
 
-/**
- *
- * @author Cono
- */
 public class Sujeto {
+
     private String nombre;
     private int temp;
-    private  SecurityLevel level;
+    private SecurityLevel level;
 
     public Sujeto(String nombre) {
         this.nombre = nombre;
@@ -33,6 +25,6 @@ public class Sujeto {
 
     public void setTemp(int temp) {
         this.temp = temp;
-    }    
-        
+    }
+
 }
