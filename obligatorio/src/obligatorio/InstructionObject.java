@@ -1,14 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package obligatorio;
 
-/**
- *
- * @author Cono
- */
 public class InstructionObject {
-    
+
+    void DoMagic(String line) {
+        String command = line;
+        String[] splited = command.split(" ");
+
+    }
+
+    private void parseCommand(String[] splited) {
+        //Todo test [0], [1], [2] else fails.
+
+    }
+
 }
