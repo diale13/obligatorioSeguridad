@@ -37,7 +37,8 @@ public class SecureSystem {
 
     private void manageLine(String line) {
         try {
-            instructionObject.ManageInstruction(line);
+            instructionObject.manageInstruction(line);
+            instructionObject.validateSubjectAndObjects(line, subjects);
         } catch (BadInstruction e) {
             System.out.println("Invalid command " + e.getMessage());
         }

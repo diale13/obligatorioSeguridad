@@ -1,14 +1,15 @@
 package obligatorio;
 
+import java.util.ArrayList;
+
 public class InstructionObject {
 
-    void ManageInstruction(String line) throws BadInstruction {
+    public void manageInstruction(String line) throws BadInstruction {
         String command = line;
         String[] splited = command.split(" ");
         if (!ValidateCommand(splited)) {
             throw new BadInstruction(line);
         }
-        System.out.println(line + "  is a valid command");
     }
 
     private boolean ValidateCommand(String[] splited) {
@@ -51,6 +52,11 @@ public class InstructionObject {
 
     private boolean ManageRead(String[] splited) {
         return (splited.length == 3);
+    }
+
+    public boolean validateSubjectAndObjects(String line, ArrayList<Subject> subjects) {
+        //Todo Validate 
+        return false;
     }
 
 }
