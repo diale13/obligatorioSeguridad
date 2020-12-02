@@ -1,0 +1,110 @@
+Reading frome file: C:\Users\Diego\Desktop\seguridad0.txt
+Bad Instruction
+The current state is: 
+lobj has value: 0
+mobj has value: 0
+hobj has value: 0
+moe has recently read: 0
+hal has recently read: 0
+lyle has recently read: 0
+-------------------------------------------------------------
+Bad Instruction
+The current state is: 
+lobj has value: 0
+mobj has value: 0
+hobj has value: 0
+moe has recently read: 0
+hal has recently read: 0
+lyle has recently read: 0
+-------------------------------------------------------------
+lyle writes value 10 to lobj
+The current state is: 
+lobj has value: 10
+mobj has value: 0
+hobj has value: 0
+moe has recently read: 0
+hal has recently read: 0
+lyle has recently read: 0
+-------------------------------------------------------------
+hal reads lobj
+The current state is: 
+lobj has value: 10
+mobj has value: 0
+hobj has value: 0
+moe has recently read: 0
+hal has recently read: 10
+lyle has recently read: 0
+-------------------------------------------------------------
+lyle writes value 20 to hobj
+The current state is: 
+lobj has value: 10
+mobj has value: 0
+hobj has value: 20
+moe has recently read: 0
+hal has recently read: 10
+lyle has recently read: 0
+-------------------------------------------------------------
+hal writes value 200 to lobj
+The current state is: 
+lobj has value: 10
+mobj has value: 0
+hobj has value: 20
+moe has recently read: 0
+hal has recently read: 10
+lyle has recently read: 0
+-------------------------------------------------------------
+hal reads hobj
+The current state is: 
+lobj has value: 10
+mobj has value: 0
+hobj has value: 20
+moe has recently read: 0
+hal has recently read: 20
+lyle has recently read: 0
+-------------------------------------------------------------
+lyle reads lobj
+The current state is: 
+lobj has value: 10
+mobj has value: 0
+hobj has value: 20
+moe has recently read: 0
+hal has recently read: 20
+lyle has recently read: 10
+-------------------------------------------------------------
+lyle reads hobj
+The current state is: 
+lobj has value: 10
+mobj has value: 0
+hobj has value: 20
+moe has recently read: 0
+hal has recently read: 20
+lyle has recently read: 0
+-------------------------------------------------------------
+Bad Instruction
+The current state is: 
+lobj has value: 10
+mobj has value: 0
+hobj has value: 20
+moe has recently read: 0
+hal has recently read: 20
+lyle has recently read: 0
+-------------------------------------------------------------
+Bad Instruction
+The current state is: 
+lobj has value: 10
+mobj has value: 0
+hobj has value: 20
+moe has recently read: 0
+hal has recently read: 20
+lyle has recently read: 0
+-------------------------------------------------------------
+Bad Instruction
+The current state is: 
+lobj has value: 10
+mobj has value: 0
+hobj has value: 20
+moe has recently read: 0
+hal has recently read: 20
+lyle has recently read: 0
+-------------------------------------------------------------
+BUILD SUCCESSFUL (total time: 9 seconds)
