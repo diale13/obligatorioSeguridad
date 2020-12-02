@@ -80,9 +80,14 @@ public class InstructionObject {
                 this.subject = splited[1];
                 this.object = splited[2];
                 this.value = Integer.parseInt(splited[3]);
-                ReferenceMonitor.writeExecute(this);
+                ReferenceMonitor.executeWrite(this);
                 break;
             case "read":
+                this.instruction = "read";
+                this.subject = splited[1];
+                this.object = splited[2];
+                this.value = Integer.parseInt(splited[3]);
+                ReferenceMonitor.executeRead(this);
                 break;
             default:
                 //Si llegaste a este punto donde un comando valido no cae en write o read peñarol

@@ -9,4 +9,9 @@ public class ObjectManager {
     public static HashMap<String, Obj> getObjectMap() {
         return objectMap;
     }
+
+    public static void addObject(Obj obj) {
+        objectMap.put(obj.getName(), obj);
+    }
+
 }
