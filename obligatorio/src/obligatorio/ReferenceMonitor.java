@@ -13,4 +13,11 @@ public class ReferenceMonitor {
         obManager.addObject(o);
     }
 
+    public ObjectManager getObManager() {
+        return obManager;
+    }
+
+    void executeOrder(String line) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

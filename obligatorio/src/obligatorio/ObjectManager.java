@@ -1,16 +1,12 @@
 package obligatorio;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ObjectManager {
 
-    private ArrayList<Obj> objects;
+    static HashMap<String, Obj> objectMap = new HashMap<String, Obj>();
 
-    public ArrayList<Obj> getObjects() {
-        return objects;
-    }
-
-    public void addObject(Obj obj) {
-        this.objects.add(obj);
+    public static HashMap<String, Obj> getObjectMap() {
+        return objectMap;
     }
 }

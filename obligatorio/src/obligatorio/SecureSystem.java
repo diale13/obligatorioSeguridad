@@ -2,22 +2,21 @@ package obligatorio;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 
 public class SecureSystem {
 
-    private Scanner scan = new Scanner(System.in);
-    private InstructionObject instructionObject = new InstructionObject();
-    private ArrayList<Subject> subjects = new ArrayList<Subject>();
-    private ReferenceMonitor referenceMonitor = new ReferenceMonitor();
+    static Scanner scan = new Scanner(System.in);
+    static ReferenceMonitor referenceMonitor = new ReferenceMonitor();
+    static HashMap<String, Subject> subjectMap = new HashMap<String, Subject>();
 
     void createSubject(String name, SecurityLevel level) {
         Subject subjectToCreate = new Subject(name, level);
-        subjects.add(subjectToCreate);
+        subjectMap.put(name, subjectToCreate);
     }
 
     public void handleCommands() {
-
         try {
             String filePath = scan.nextLine();
             BufferedReader in = new BufferedReader(new FileReader(filePath));
@@ -26,22 +25,25 @@ public class SecureSystem {
                 manageLine(line);
             }
             in.close();
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());
         }
     }
 
-    public ReferenceMonitor getReferenceMonitor() {
+    private void manageLine(String line) {
+        try {
+            InstructionObject instr = new InstructionObject(line);
+        } catch (BadInstruction e) {
+            System.out.println("BAD INSTRUCTION");
+        }
+    }
+
+    public static ReferenceMonitor getReferenceMonitor() {
         return referenceMonitor;
     }
 
-    private void manageLine(String line) {
-        try {
-            instructionObject.manageInstruction(line);
-            instructionObject.validateSubjectAndObjects(line, subjects);
-        } catch (BadInstruction e) {
-            System.out.println("Invalid command " + e.getMessage());
-        }
+    public static HashMap<String, Subject> getSubjectManager() {
+        return subjectMap;
     }
 
 }

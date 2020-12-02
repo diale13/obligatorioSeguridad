@@ -4,41 +4,52 @@ import java.util.ArrayList;
 
 public class InstructionObject {
 
+    private String instruction;
+    private String subject;
+    private String object;
+    private int value;
+
+    InstructionObject(String line) throws BadInstruction {
+        manageInstruction(line);
+
+    }
+
     public void manageInstruction(String line) throws BadInstruction {
         String command = line;
         String[] splited = command.split(" ");
-        if (!ValidateCommand(splited)) {
+        if (!validateCommand(splited)) {
             throw new BadInstruction(line);
         }
+        manageExecute(splited);
     }
 
-    private boolean ValidateCommand(String[] splited) {
-        boolean isValid = true;
-        isValid = isValid && IsLengthValid(splited) && IsSintaxCorrect(splited);
+    private boolean validateCommand(String[] splited) {
+        boolean isValid = isLengthValid(splited) && sintaxAndParticipantsOk(splited);
         return isValid;
     }
 
-    private boolean IsLengthValid(String[] splited) {
+    private boolean isLengthValid(String[] splited) {
         return (splited.length <= 4 && splited.length > 2);
     }
 
-    private boolean IsSintaxCorrect(String[] splited) {
-        String firstCommand = splited[0];
+    private boolean sintaxAndParticipantsOk(String[] splited) {
+        String firstCommand = splited[0].toLowerCase();
         boolean isValid = true;
         switch (firstCommand) {
             case "write":
-                ManageWrite(splited);
+                isValid = manageWriteSintax(splited) && objectAndSubjectExist(splited[1], splited[2]);
                 break;
             case "read":
-                ManageRead(splited);
+                isValid = manageReadSintax(splited) && objectAndSubjectExist(splited[1], splited[2]);
                 break;
             default:
                 isValid = false;
+                break;
         }
         return isValid;
     }
 
-    private boolean ManageWrite(String[] splited) {
+    private boolean manageWriteSintax(String[] splited) {
         try {
             if (splited.length != 4) {
                 return false;
@@ -50,13 +61,18 @@ public class InstructionObject {
         }
     }
 
-    private boolean ManageRead(String[] splited) {
+    private boolean manageReadSintax(String[] splited) {
         return (splited.length == 3);
     }
 
-    public boolean validateSubjectAndObjects(String line, ArrayList<Subject> subjects) {
-        //Todo Validate 
-        return false;
+    private boolean objectAndSubjectExist(String subjectName, String objectName) {
+        boolean subjectExists = SecureSystem.getSubjectManager().containsKey(subjectName);
+        boolean objectExists = ObjectManager.getObjectMap().containsKey(objectName);
+        return subjectExists && objectExists;
+    }
+
+    private void manageExecute(String[] splited) {
+        //valid instruction from now on       
     }
 
 }
