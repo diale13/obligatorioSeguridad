@@ -17,13 +17,30 @@ public class ReferenceMonitor {
         return obManager;
     }
 
-    static void executeWrite(InstructionObject aThis) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    static void executeWrite(InstructionObject instr) {
+        String instructionSubject = instr.getSubject();
+        String instructionObj = instr.getObject();
+
+        Subject subject = SecureSystem.getSubjectManager().get(instructionSubject);
+        Obj obj = ObjectManager.getObjectManager().get(instructionObj);
+
+        if (SecurityLevelManager.canWrite(subject.getLevel(), obj.getLevel())) {
+            ObjectManager.write(instr);
+        }
     }
 
-    static void executeRead(InstructionObject aThis) {
-        //validate security level, if is invalid read should read 0
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    static void executeRead(InstructionObject instr) {
+        String instructionSubject = instr.getSubject();
+        String instructionObj = instr.getObject();
+
+        Subject subject = SecureSystem.getSubjectManager().get(instructionSubject);
+        Obj obj = ObjectManager.getObjectManager().get(instructionObj);
+
+        if (SecurityLevelManager.dominates(subject.getLevel(), obj.getLevel())) {
+            ObjectManager.read(instr);
+        } else {
+            ObjectManager.bad(instr);
+        }
     }
 
 }

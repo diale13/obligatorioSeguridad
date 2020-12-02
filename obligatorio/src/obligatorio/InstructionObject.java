@@ -64,7 +64,7 @@ public class InstructionObject {
 
     private boolean objectAndSubjectExist(String subjectName, String objectName) {
         boolean subjectExists = SecureSystem.getSubjectManager().containsKey(subjectName);
-        boolean objectExists = ObjectManager.getObjectMap().containsKey(objectName);
+        boolean objectExists = ObjectManager.getObjectManager().containsKey(objectName);
         return subjectExists && objectExists;
     }
 

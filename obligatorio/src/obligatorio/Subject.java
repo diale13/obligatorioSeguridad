@@ -20,6 +20,10 @@ public class Subject {
         return temp;
     }
 
+    public SecurityLevel getLevel() {
+        return level;
+    }
+
     public void setTemp(int temp) {
         this.temp = temp;
     }
