@@ -19,6 +19,7 @@ public class SecureSystem {
     public void handleCommands() {
         try {
             String filePath = scan.nextLine();
+            System.out.println("Reading frome file: " + filePath);
             BufferedReader in = new BufferedReader(new FileReader(filePath));
             String line;
             while ((line = in.readLine()) != null) {
@@ -33,8 +34,10 @@ public class SecureSystem {
     private void manageLine(String line) {
         try {
             InstructionObject instr = new InstructionObject(line);
+            printState(instr);
         } catch (BadInstruction e) {
-            System.out.println("BAD INSTRUCTION");
+            System.out.println("Bad Instruction");
+            printCurrentState();
         }
     }
 
@@ -46,4 +49,35 @@ public class SecureSystem {
         return subjectMap;
     }
 
+    private static void printState(InstructionObject instr) {
+        String instruction = instr.getInstruction();
+        String subj = instr.getSubject();
+        String obj = instr.getObject();
+
+        if (instruction.equalsIgnoreCase("read")) {
+            String outText = subj + " reads " + obj;
+            System.out.println(outText);
+        }
+        if (instruction.equalsIgnoreCase("write")) {
+            String outText = subj + " writes value " + instr.getValue() + " to " + obj;
+            System.out.println(outText);
+        }
+        printCurrentState();
+    }
+
+    private static void printCurrentState() {
+        System.out.println("The current state is: ");
+        ArrayList<Obj> objsToPrint = new ArrayList<>();
+        objsToPrint.addAll(ObjectManager.getObjectManager().values());
+        for (int i = 0; i < objsToPrint.size(); i++) {
+            System.out.println(objsToPrint.get(i).getName() + " has value: " + objsToPrint.get(i).getValue());
+        }
+
+        ArrayList<Subject> subjectsToPrint = new ArrayList<>();
+        subjectsToPrint.addAll(subjectMap.values());
+        for (int i = 0; i < subjectsToPrint.size(); i++) {
+            System.out.println(subjectsToPrint.get(i).getName() + " has recently read: " + subjectsToPrint.get(i).getTemp());
+        }
+        System.out.println("-------------------------------------------------------------");
+    }
 }

@@ -12,7 +12,11 @@ public class Startup {
         sys.createSubject("lyle", low);
         sys.createSubject("moe", medium);
         sys.createSubject("hal", high);
-        
+
+        sys.getReferenceMonitor().createNewObject("lobj", low);
+        sys.getReferenceMonitor().createNewObject("mobj", medium);
+        sys.getReferenceMonitor().createNewObject("hobj", high);
+
         sys.handleCommands();
     }
 }

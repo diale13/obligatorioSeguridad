@@ -5,6 +5,7 @@ public class Subject {
     private String name;
     private int temp;
     private SecurityLevel level;
+    
 
     public Subject(String name, SecurityLevel level) {
         this.name = name;

@@ -15,7 +15,7 @@ public class InstructionObject {
         String command = line;
         String[] splited = command.split(" ");
         if (!validateCommand(splited)) {
-            throw new BadInstruction(line);
+            throw new BadInstruction("The command " + line + " is not valid");
         }
         manageExecute(splited);
     }
@@ -81,7 +81,6 @@ public class InstructionObject {
                 break;
             case "read":
                 this.instruction = "read";
-                this.value = Integer.parseInt(splited[3]);
                 ReferenceMonitor.executeRead(this);
                 break;
             default:
