@@ -22,6 +22,7 @@ public class ReferenceMonitor {
     }
 
     static void executeRead(InstructionObject aThis) {
+        //validate security level, if is invalid read should read 0
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

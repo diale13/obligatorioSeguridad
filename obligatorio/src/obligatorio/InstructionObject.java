@@ -1,7 +1,5 @@
 package obligatorio;
 
-import java.util.ArrayList;
-
 public class InstructionObject {
 
     private String instruction;
@@ -11,7 +9,6 @@ public class InstructionObject {
 
     InstructionObject(String line) throws BadInstruction {
         manageInstruction(line);
-
     }
 
     public void manageInstruction(String line) throws BadInstruction {
@@ -73,27 +70,41 @@ public class InstructionObject {
 
     private void manageExecute(String[] splited) throws BadInstruction {
         String firstCommand = splited[0].toLowerCase();
+        this.subject = splited[1];
+        this.object = splited[2];
 
         switch (firstCommand) {
             case "write":
                 this.instruction = "write";
-                this.subject = splited[1];
-                this.object = splited[2];
                 this.value = Integer.parseInt(splited[3]);
                 ReferenceMonitor.executeWrite(this);
                 break;
             case "read":
                 this.instruction = "read";
-                this.subject = splited[1];
-                this.object = splited[2];
                 this.value = Integer.parseInt(splited[3]);
                 ReferenceMonitor.executeRead(this);
                 break;
             default:
-                //Si llegaste a este punto donde un comando valido no cae en write o read peñarol
-                //no es el cuadro mas grande de uru. Tambien los cerdos vuelan. -Franggi 
+                //Si llegaste a este punto donde un comando valido no cae en write o read, peñarol
+                //no es el cuadro mas grande de uru. Tambien los cerdos vuelan. -Franggi 2020
                 throw new BadInstruction("");
         }
+    }
+
+    public String getInstruction() {
+        return this.instruction;
+    }
+
+    public String getSubject() {
+        return this.subject;
+    }
+
+    public String getObject() {
+        return this.object;
+    }
+
+    public int getValue() {
+        return this.value;
     }
 
 }
