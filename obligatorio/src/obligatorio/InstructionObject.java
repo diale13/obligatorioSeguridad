@@ -71,8 +71,24 @@ public class InstructionObject {
         return subjectExists && objectExists;
     }
 
-    private void manageExecute(String[] splited) {
-        //valid instruction from now on       
+    private void manageExecute(String[] splited) throws BadInstruction {
+        String firstCommand = splited[0].toLowerCase();
+
+        switch (firstCommand) {
+            case "write":
+                this.instruction = "write";
+                this.subject = splited[1];
+                this.object = splited[2];
+                this.value = Integer.parseInt(splited[3]);
+                ReferenceMonitor.writeExecute(this);
+                break;
+            case "read":
+                break;
+            default:
+                //Si llegaste a este punto donde un comando valido no cae en write o read peñarol
+                //no es el cuadro mas grande de uru. Tambien los cerdos vuelan. -Franggi 
+                throw new BadInstruction("");
+        }
     }
 
 }
