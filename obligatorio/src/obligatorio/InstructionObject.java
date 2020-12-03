@@ -39,6 +39,12 @@ public class InstructionObject {
             case "read":
                 isValid = manageReadSintax(splited) && objectAndSubjectExist(splited[1], splited[2]);
                 break;
+            case "destroy":
+                isValid = manageReadSintax(splited) && objectAndSubjectExist(splited[1], splited[2]);
+                break;
+            case "create":
+                isValid = validateCreate(splited[1], splited[2]);
+                break;
             default:
                 isValid = false;
                 break;
@@ -62,6 +68,12 @@ public class InstructionObject {
         return (splited.length == 3);
     }
 
+    private boolean validateCreate(String subjectName, String objectName) {
+        boolean subjectExists = SecureSystem.getSubjectManager().containsKey(subjectName);
+        boolean objectDoesNotExist = ObjectManager.getObjectManager().containsKey(objectName);
+        return subjectExists && !objectDoesNotExist;
+    }
+
     private boolean objectAndSubjectExist(String subjectName, String objectName) {
         boolean subjectExists = SecureSystem.getSubjectManager().containsKey(subjectName);
         boolean objectExists = ObjectManager.getObjectManager().containsKey(objectName);
@@ -83,6 +95,15 @@ public class InstructionObject {
                 this.instruction = "read";
                 ReferenceMonitor.executeRead(this);
                 break;
+            case "destroy":
+                this.instruction = "destroy";
+                ReferenceMonitor.executeDestroy(this);
+                break;
+            case "create":
+                this.instruction = "create";
+                SecureSystem.getReferenceMonitor().executeCreate(this);
+                break;
+
             default:
                 //Si llegaste a este punto donde un comando valido no cae en write o read, peñarol
                 //no es el cuadro mas grande de uru. Tambien los cerdos vuelan. -Franggi 2020

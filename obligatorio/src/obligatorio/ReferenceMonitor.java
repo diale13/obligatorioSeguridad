@@ -43,4 +43,25 @@ public class ReferenceMonitor {
         }
     }
 
+    static void executeDestroy(InstructionObject instr) {
+        String instructionSubject = instr.getSubject();
+        String instructionObj = instr.getObject();
+
+        Subject subject = SecureSystem.getSubjectManager().get(instructionSubject);
+        Obj obj = ObjectManager.getObjectManager().get(instructionObj);
+
+        if (SecurityLevelManager.canWrite(subject.getLevel(), obj.getLevel())) {
+            ObjectManager.destroy(instr);
+        } else {
+            System.out.println("Invalid destroy instruction");
+        }
+    }
+
+    void executeCreate(InstructionObject instr) {
+        String subj = instr.getSubject();
+        Subject subject = SecureSystem.getSubjectManager().get(subj);
+        Obj o = new Obj(instr.getObject(), subject.getLevel());
+        getObManager().addObject(o);
+    }
+
 }
