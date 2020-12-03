@@ -15,7 +15,12 @@ import static obligatorio.SecureSystem.scan;
 
 public class Startup {
 
+    static FileOutputStream outfile;
     static long numOfBits = 0;
+
+    public static FileOutputStream getOutfile() {
+        return outfile;
+    }
 
     public static void main(String[] args) throws FileNotFoundException, IOException {
         SecureSystem sys = new SecureSystem();
@@ -29,6 +34,7 @@ public class Startup {
         sys.createSubject("hal", high);
 
         try {
+            ReferenceMonitor a = new ReferenceMonitor();
             String filePath = scan.nextLine();
             System.out.println("Reading frome file: " + filePath);
             Path path = Paths.get(filePath);
@@ -37,7 +43,7 @@ public class Startup {
             String fileName = infile.getName() + ".out";
             String title = "log.txt";
             byte[] newLine = System.getProperty("line.separator").getBytes();
-            FileOutputStream outfile = new FileOutputStream(fileName);
+            outfile = new FileOutputStream(fileName);
             FileOutputStream logOut = new FileOutputStream(title);
 
             while (sc.hasNextLine()) {
@@ -89,9 +95,8 @@ public class Startup {
             }
 
         } catch (Exception ex) {
-            System.out.println("File not found or bad instruction");
+            System.out.println(ex.getMessage());
         }
-
         //sys.handleCommands(); part 1
     }
 }

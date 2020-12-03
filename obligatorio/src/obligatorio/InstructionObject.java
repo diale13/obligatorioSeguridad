@@ -1,5 +1,7 @@
 package obligatorio;
 
+import java.io.IOException;
+
 public class InstructionObject {
 
     private String instruction;
@@ -7,17 +9,22 @@ public class InstructionObject {
     private String object;
     private int value;
 
-    InstructionObject(String line) throws BadInstruction {
+    InstructionObject(String line) throws IOException {
         manageInstruction(line);
     }
 
-    public void manageInstruction(String line) throws BadInstruction {
+    public void manageInstruction(String line) throws IOException {
         String command = line;
         String[] splited = command.split(" ");
-        if (!validateCommand(splited)) {
-            throw new BadInstruction("The command " + line + " is not valid");
+        if (splited[0].equals("run")) {
+            manageRun(splited);
+        } else {
+            if (!validateCommand(splited)) {
+                this.instruction = "BAD";
+                return;
+            }
+            manageExecute(splited);
         }
-        manageExecute(splited);
     }
 
     private boolean validateCommand(String[] splited) {
@@ -80,7 +87,7 @@ public class InstructionObject {
         return subjectExists && objectExists;
     }
 
-    private void manageExecute(String[] splited) throws BadInstruction {
+    private void manageExecute(String[] splited) {
         String firstCommand = splited[0].toLowerCase();
         this.subject = splited[1];
         this.object = splited[2];
@@ -107,8 +114,14 @@ public class InstructionObject {
             default:
                 //Si llegaste a este punto donde un comando valido no cae en write o read, peñarol
                 //no es el cuadro mas grande de uru. Tambien los cerdos vuelan. -Franggi 2020
-                throw new BadInstruction("");
+                break;
         }
+    }
+
+    private void manageRun(String[] splited) throws IOException {
+        this.subject = splited[1];
+        this.instruction = "run";
+        ReferenceMonitor.executeRun(this);
     }
 
     public String getInstruction() {

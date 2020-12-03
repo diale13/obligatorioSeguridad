@@ -31,14 +31,9 @@ public class SecureSystem {
         }
     }
 
-    private void manageLine(String line) {
-        try {
-            InstructionObject instr = new InstructionObject(line);
-            printState(instr);
-        } catch (BadInstruction e) {
-            System.out.println("Bad Instruction");
-            printCurrentState();
-        }
+    private void manageLine(String line) throws IOException {
+        InstructionObject instr = new InstructionObject(line);
+        printState(instr);
     }
 
     public static ReferenceMonitor getReferenceMonitor() {
@@ -81,9 +76,9 @@ public class SecureSystem {
         System.out.println("-------------------------------------------------------------");
     }
 
-    static void passInstructionsStatic(String[] instructions) throws BadInstruction {
+    static void passInstructionsStatic(String[] instructions) throws IOException {
         for (int i = 0; i < instructions.length; i++) {
-            new InstructionObject(instructions[i]);
+            Object inst = new InstructionObject(instructions[i]);
         }
     }
 }
