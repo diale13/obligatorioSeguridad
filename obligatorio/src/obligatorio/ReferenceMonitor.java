@@ -85,9 +85,9 @@ public class ReferenceMonitor {
         Subject subject = SecureSystem.getSubjectManager().get(subj);
         int temp = subject.getTemp();
 
-        String curBit = runManager.get(instr.getSubject());
+        String curBit = runManager.get(subj);
 
-// If first bit for the byte
+        // If first bit for the byte
         if (curBit.equals("temp")) {
             if (temp != 0) {
                 curBit = "1";
@@ -111,13 +111,8 @@ public class ReferenceMonitor {
         if (curBit.length() == 8) {
             resultLine = curBit;
             int charTemp = Integer.parseInt(resultLine, 2);
-            resultLine = Character.valueOf((char) charTemp).toString();
+            resultLine = new Character((char) charTemp).toString();
         }
-
-    }
-
-    // Execute the RUN call.
-    static void runExecute(InstructionObject instr) {
 
     }
 
