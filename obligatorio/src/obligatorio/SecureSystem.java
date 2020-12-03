@@ -80,4 +80,10 @@ public class SecureSystem {
         }
         System.out.println("-------------------------------------------------------------");
     }
+
+    static void passInstructionsStatic(String[] instructions) throws BadInstruction {
+        for (int i = 0; i < instructions.length; i++) {
+            new InstructionObject(instructions[i]);
+        }
+    }
 }
