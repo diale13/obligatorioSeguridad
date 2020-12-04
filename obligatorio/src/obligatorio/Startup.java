@@ -69,27 +69,34 @@ public class Startup {
                     }
                     String[] send0 = {"run hal", "create hal obj"};
                     String[] send1 = {"run hal"};
+                    String[] recieve = {"create lyle obj", "write lyle obj 1", "read lyle obj", "destroy lyle obj", "run lyle"};
                     String log = "";
                     // Based on bit being 0 or 1, run appropriate instructions
                     for (int i = 0; i < inputLength; i++) {
                         if (inputBit.charAt(i) == '0') {
                             SecureSystem.passInstructionsStatic(send0);
+                            SecureSystem.passInstructionsStatic(recieve);
                             log += Arrays.toString(send0);
+                            log += "\n  bit 0 sent, now recieve: ";
+                            log += Arrays.toString(recieve);
                         } // bit is 1
                         else {
                             SecureSystem.passInstructionsStatic(send1);
+                            SecureSystem.passInstructionsStatic(recieve);
                             log += Arrays.toString(send1);
+                            log += "\n  bit 1 sent, now recieve: ";
+                            log += Arrays.toString(recieve);
                         }
                         byte[] logResult = log.getBytes();
                         logOut.write(logResult);
                         logOut.write(newLine);
                     }
-                    // Write byte to out file, then reset the run manager for the next byte
                     numOfBytes--;
                     String result = ReferenceMonitor.getResultLine();
+                    System.out.println(result);
                     byte[] resultArray = result.getBytes();
                     outfile.write(resultArray);
-                    ReferenceMonitor.getRunManager().put("LYLE", "temp");
+                    ReferenceMonitor.getRunManager().put("lyle", "temp");
                 }
                 outfile.write(newLine);
             }
