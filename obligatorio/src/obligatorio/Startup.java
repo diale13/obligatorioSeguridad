@@ -79,7 +79,7 @@ public class Startup {
                             log += Arrays.toString(send0);
                             log += "\n  bit 0 sent, now recieve: ";
                             log += Arrays.toString(recieve);
-                        } // bit is 1
+                        } 
                         else {
                             SecureSystem.passInstructionsStatic(send1);
                             SecureSystem.passInstructionsStatic(recieve);

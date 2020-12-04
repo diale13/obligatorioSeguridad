@@ -106,7 +106,6 @@ public class ReferenceMonitor {
                 runManager.put(instr.getSubject(), curBit);
             }
         }
-
         // If 8 bits, we have a byte so make that the result string
         if (curBit.length() == 8) {
             resultLine = curBit;
